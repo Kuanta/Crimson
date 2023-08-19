@@ -7,7 +7,7 @@
 
 #include <map>
 #include <string>
-#include "Shader.h"
+#include "Rendering/Shader.h"
 #include "Utils/Events.hpp"
 
 namespace Crimson

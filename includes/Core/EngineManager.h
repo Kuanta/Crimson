@@ -10,6 +10,7 @@
 #include <typeindex>
 #include <unordered_map>
 #include "Core/TimeManager.h"
+#include "Core/AMS/AssetManager.h"
 
 namespace Crimson
 {
@@ -44,10 +45,14 @@ namespace Crimson
         }
         return nullptr;
     }
+
+    public:
+        TimeManager TimeManager;
+        AssetManager AssetManager;
+
     protected:
 
     private:
-        TimeManager TimeManager;
         bool _engineShouldStop = false;
 
     };

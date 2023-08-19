@@ -5,7 +5,7 @@
 #ifndef CRIMSON_RENDERER_H
 #define CRIMSON_RENDERER_H
 
-#include "RenderWindow.h"
+#include "Rendering/RenderWindow.h"
 #include "UniformBuffer.h"
 #include "Camera.h"
 #include "ShaderManager.h"

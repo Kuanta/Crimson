@@ -6,7 +6,7 @@
 #define CRIMSON_UNIFORMBUFFER_H
 
 #include <glm/glm.hpp>
-#include "Shader.h"
+#include "Rendering/Shader.h"
 
 namespace Crimson
 {

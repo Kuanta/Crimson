@@ -4,12 +4,14 @@ project(crimson)
 set(CMAKE_CXX_STANDARD 14)
 
 # Source and Header files
-file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.c")
-file(GLOB_RECURSE HEADERS "src/*.h" "includes/*.h")
+file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.c" "Testing/*.cpp")
+file(GLOB_RECURSE HEADERS "src/*.h" "includes/*.h" "Testing/*.h")
 
 find_package(glfw3 CONFIG REQUIRED)
+find_package(Boost REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
 
-add_executable(crimson ${SOURCES} ${HEADERS} includes/Core/Modules/RenderWindowModule.h src/Core/EngineModules/RenderWindowModule.cpp includes/Core/Modules/ECSModule.h includes/Core/ECS/Entity.h src/Core/ECS/SceneManager.cpp includes/Core/ECS/SceneManager.h src/Core/ECS/Entity.cpp includes/Rendering/Components/MeshRenderer.h includes/Core/TimeManager.h Testing/NotifierComponent.cpp Testing/NotifierComponent.h src/Core/TimeManager.cpp src/Core/AMS/AssetManager.cpp includes/Core/AMS/AssetManager.h)
+add_executable(crimson ${SOURCES} includes/Core/AMS/AssetType.h includes/Rendering/ShaderAsset.h src/Rendering/ShaderAsset.cpp)
 
 # Include directories
 target_include_directories(crimson PRIVATE
@@ -22,7 +24,9 @@ target_include_directories(crimson PRIVATE
 # Link libraries
 target_link_libraries(crimson
         PRIVATE glfw
+        PRIVATE ${Boost_LIBRARIES}
         -lassimp.dll
         -lgdi32
         -lopengl32
+        -lbcrypt
         )

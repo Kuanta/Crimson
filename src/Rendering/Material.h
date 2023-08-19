@@ -5,7 +5,7 @@
 #ifndef CRIMSON_MATERIAL_H
 #define CRIMSON_MATERIAL_H
 
-#include "Shader.h"
+#include "Rendering/Shader.h"
 
 namespace Crimson
 {

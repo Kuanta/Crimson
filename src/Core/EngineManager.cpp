@@ -158,6 +158,7 @@ bool Crimson::EngineManager::InitializeEngine() {
     //Register modules
     RenderWindowModule* windowModule = new RenderWindowModule();
     SceneManager* sceneManager = new SceneManager();
+    AssetManager.Initialize();
 
     RegisterModule(windowModule);
     RegisterModule(sceneManager);

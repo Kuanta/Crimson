@@ -2,24 +2,9 @@
 // Created by erdem on 26.12.2022.
 //
 
-#include "RenderWindow.h"
+#include "Rendering/RenderWindow.h"
 
-bool RenderWindow::Initialize() {
-
-    //Initialize Glfw
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    glfwWindowHint(GLFW_SAMPLES, 0);
-    glfwWindowHint(GLFW_RED_BITS, 16);
-    glfwWindowHint(GLFW_GREEN_BITS, 16);
-    glfwWindowHint(GLFW_BLUE_BITS, 16);
-    glfwWindowHint(GLFW_ALPHA_BITS, 16);
-    glfwWindowHint(GLFW_STENCIL_BITS, 16);
-    glfwWindowHint(GLFW_DEPTH_BITS, 24);
+bool Crimson::RenderWindow::Initialize() {
 
     this->glfwWindow = glfwCreateWindow(800, 600, "Crimson", NULL, NULL);
     glfwSetFramebufferSizeCallback(this->glfwWindow, framebuffer_size_callback);
@@ -40,17 +25,25 @@ bool RenderWindow::Initialize() {
     return true;
 }
 
-void RenderWindow::framebuffer_size_callback(GLFWwindow* window, int width, int height)
+void Crimson::RenderWindow::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
 
-void RenderWindow::Render() {
+void Crimson::RenderWindow::Render() {
     glfwPollEvents();
     glfwSwapBuffers(glfwWindow);
 }
 
-bool RenderWindow::ShouldClose() {
+bool Crimson::RenderWindow::ShouldClose() {
 
     return glfwWindowShouldClose(glfwWindow);
+}
+
+void Crimson::RenderWindow::Cleanup() {
+    glfwDestroyWindow(glfwWindow);
+}
+
+void Crimson::RenderWindow::SetWindowShouldClose() {
+    glfwSetWindowShouldClose(glfwWindow, true);
 }

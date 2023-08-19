@@ -4,6 +4,7 @@
 
 #include "Core/Modules/RenderWindowModule.h"
 #include "Core/EngineManager.h"
+#include "Rendering/RenderWindow.h"
 
 namespace Crimson
 {
@@ -11,39 +12,62 @@ namespace Crimson
 
     RenderWindowModule::~RenderWindowModule()
     {
-        if (window)
-            glfwDestroyWindow(window);
+        if (_currentWindow)
+            _currentWindow->Cleanup();
         glfwTerminate();
     }
 
     bool RenderWindowModule::Initialize()
     {
-        if (!glfwInit())
-            return false;
+        //Initialize Glfw
+        glfwInit();
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-        window = glfwCreateWindow(800, 600, "Crimson Engine", NULL, NULL);
-        if (!window)
-        {
-            glfwTerminate();
-            ParentManager->StopEngine();
-            return false;
-        }
+        glfwWindowHint(GLFW_SAMPLES, 0);
+        glfwWindowHint(GLFW_RED_BITS, 16);
+        glfwWindowHint(GLFW_GREEN_BITS, 16);
+        glfwWindowHint(GLFW_BLUE_BITS, 16);
+        glfwWindowHint(GLFW_ALPHA_BITS, 16);
+        glfwWindowHint(GLFW_STENCIL_BITS, 16);
+        glfwWindowHint(GLFW_DEPTH_BITS, 24);
 
-        glfwMakeContextCurrent(window);
-
-        return true;
+       _currentWindow = new Crimson::RenderWindow();
+       return _currentWindow->Initialize();
     }
 
     void RenderWindowModule::Update(float deltaTime)
     {
-        if (!window)
+        if (!_currentWindow)
         {
             ParentManager->StopEngine();
             return;
         }
         glfwPollEvents();
 
-        if (glfwWindowShouldClose(window))
-            glfwSetWindowShouldClose(window, true);
+        if (_currentWindow->ShouldClose())
+        {
+            _currentWindow->SetWindowShouldClose();
+        }
     }
+
+    void RenderWindowModule::PreRender() {
+        EngineModule::PreRender();
+        if(_currentWindow == nullptr) return;
+        _currentWindow->Render();
+    }
+
+    void RenderWindowModule::Render() {
+        EngineModule::Render();
+        _currentWindow->Render();
+    }
+
+    void RenderWindowModule::PostRender() {
+        EngineModule::PostRender();
+        if(_currentWindow == nullptr) return;
+        _currentWindow->Cleanup();
+    }
+
 }

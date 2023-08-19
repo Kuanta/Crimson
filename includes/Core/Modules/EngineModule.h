@@ -15,7 +15,9 @@ namespace Crimson
         virtual bool Initialize() = 0;
         virtual void Update(float deltaTime) {}
         virtual void LateUpdate(float deltaTime){}
+        virtual void PreRender(){}
         virtual void Render(){}
+        virtual void PostRender(){}
 
     public:
         EngineManager* ParentManager;

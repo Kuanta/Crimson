@@ -11,19 +11,22 @@
 
 namespace Crimson
 {
+    class RenderWindow;
     class RenderWindowModule : public EngineModule
     {
     public:
         RenderWindowModule();
         ~RenderWindowModule();
 
-        virtual bool Initialize() override;
-        virtual void Update(float deltaTime) override;
+        bool Initialize() override;
+        void PreRender() override;
+        void Update(float deltaTime) override;
+        void Render() override;
+        void PostRender() override;
 
-        GLFWwindow* GetWindow() const { return window; }
 
     private:
-        GLFWwindow* window = nullptr;
+        RenderWindow* _currentWindow = nullptr;
     };
 }
 #endif //CRIMSON_RENDERWINDOWMODULE_H

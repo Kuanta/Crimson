@@ -2,7 +2,7 @@
 // Created by erdem on 26.12.2022.
 //
 
-#include "Shader.h"
+#include "Rendering/Shader.h"
 
 Crimson::Shader::Shader() {
 
