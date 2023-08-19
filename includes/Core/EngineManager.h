@@ -11,6 +11,7 @@
 #include <unordered_map>
 #include "Core/TimeManager.h"
 #include "Core/AMS/AssetManager.h"
+#include "Rendering/MaterialLibrary.h"
 
 namespace Crimson
 {
@@ -19,14 +20,12 @@ namespace Crimson
     class EngineManager {
 //Fields
     public:
+        static EngineManager* GetInstance() {
+            if (!instance)
+                instance = new EngineManager;
+            return instance;
+        }
 
-    protected:
-
-    private:
-        std::unordered_map<std::type_index, EngineModule*> modulesMap;
-
-//Methods
-    public:
         bool InitializeEngine();
         void StartEngine();
         void StopEngine();
@@ -34,30 +33,43 @@ namespace Crimson
         void Update();
         void Render();
         void LateUpdate();
-
-    template<typename T>
-    T* GetEngineModule()
-    {
-        std::type_index typeIndex(typeid(T));
-        if (modulesMap.find(typeIndex) != modulesMap.end())
+        template<typename T>
+        T* GetEngineModule()
         {
-            return dynamic_cast<T*>(modulesMap[typeIndex]);
+            std::type_index typeIndex(typeid(T));
+            if (modulesMap.find(typeIndex) != modulesMap.end())
+            {
+                return dynamic_cast<T*>(modulesMap[typeIndex]);
+            }
+            return nullptr;
         }
-        return nullptr;
-    }
-
-    public:
-        TimeManager TimeManager;
-        AssetManager AssetManager;
 
     protected:
 
     private:
+        EngineManager() {}
+        EngineManager(EngineManager const&) = delete;
+        void operator=(EngineManager const&) = delete;
+
+        std::unordered_map<std::type_index, EngineModule*> modulesMap;
+
+//Methods
+
+
+
+    public:
+        TimeManager TimeManager;
+        AssetManager AssetManager;
+        MaterialLibrary MaterialLibrary;
+
+    protected:
+
+    private:
+        static EngineManager* instance;
         bool _engineShouldStop = false;
 
     };
 
 }
-
 
 #endif //CRIMSON_ENGINEMANAGER_H

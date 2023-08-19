@@ -14,12 +14,12 @@ namespace Crimson
 
     class Asset {
     public:
-        Asset(AssetType type, const std::string &guid, const std::string &name, const std::string &arguments);
+        Asset(AssetType type, const std::string &guid, const std::string &name, const std::string &filepath);
 
     public:
         std::string Guid;
         std::string Name;
-        std::string Arguments;
+        std::string Filepath;
         AssetType AssetType;
     };
 

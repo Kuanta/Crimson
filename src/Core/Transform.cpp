@@ -1,60 +1,18 @@
-//
-// Created by erdem on 26.12.2022.
-//
 
-#include "../../includes/Core/Transform.h"
-#include "../../includes/Core/Object.h"
+#include "Core/Transform.h"
+#include "Core/Actor.h"
 
 Crimson::Transform::Transform() {
     position = glm::vec3(0,0,0);
-    rotation = glm::quat (0,0,0,1);
+    rotation = glm::quat (1,0,0,0);
     scale = glm::vec3(1,1,1);
-    parent = nullptr;
+    requireModelUpdate = true;
 }
 
 void Crimson::Transform::Update(float deltaTime) {
     if(requireModelUpdate)
     {
         UpdateModel();
-    }
-
-    for (vector<Transform *>::iterator it = this->children.Elements.begin(); it != this->children.Elements.end(); it++)
-    {
-        if ((*it) != nullptr)
-        {
-            (*it)->ParentObject->Update(deltaTime);
-        }
-    }
-}
-
-void Crimson::Transform::LateUpdate(float deltaTime) {
-    for (vector<Transform *>::iterator it = this->children.Elements.begin(); it != this->children.Elements.end(); it++)
-    {
-        if ((*it) != nullptr)
-        {
-            (*it)->ParentObject->LateUpdate(deltaTime);
-        }
-    }
-}
-
-void Crimson::Transform::FixedUpdate(float fixedDeltaTime) {
-    for (vector<Transform *>::iterator it = this->children.Elements.begin(); it != this->children.Elements.end(); it++)
-    {
-        if ((*it) != nullptr)
-        {
-            (*it)->ParentObject->FixedUpdate(fixedDeltaTime);
-        }
-    }
-}
-
-
-void Crimson::Transform::OnRender() {
-    for (vector<Transform *>::iterator it = this->children.Elements.begin(); it != this->children.Elements.end(); it++)
-    {
-        if ((*it) != nullptr)
-        {
-            (*it)->ParentObject->Render();
-        }
     }
 }
 
@@ -82,56 +40,37 @@ void Crimson::Transform::UpdateLocalMatrix() {
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, this->position);
     glm::vec3 eulerAngles = glm::eulerAngles(this->rotation); //returns degrees
-    model = glm::rotate(model, glm::radians(this->rotation.y), glm::vec3(0, 1, 0)); //Yaw
-    model = glm::rotate(model, glm::radians(this->rotation.x), glm::vec3(1, 0, 0)); //Pitch
-    model = glm::rotate(model, glm::radians(this->rotation.z), glm::vec3(0, 0, 1)); //Roll
+    model *= glm::toMat4(rotation);
     model = glm::scale(model, this->scale);
     this->localMatrix = model;
-
-    //Children also need model update
-    for (vector<Transform *>::iterator it = this->children.Elements.begin(); it != this->children.Elements.end(); it++)
-    {
-        if ((*it) != nullptr)
-        {
-            (*it)->requireModelUpdate = true;
-        }
-    }
 }
 
 void Crimson::Transform::UpdateModel() {
-    glm::mat4 model = glm::mat4(1.0f);
-    Transform* parent = this->parent;
-    while(parent != nullptr)
+    if(!requireModelUpdate) return;
+    UpdateLocalMatrix();
+    glm::mat4 model = GetLocalMatrix();
+    Entity* entity = owner->ParentEntity;
+    Crimson::Actor* parentActor = dynamic_cast<Crimson::Actor*>(entity);
+
+    if(parentActor!= nullptr)
     {
-        model *= parent->GetLocalMatrix();
-        parent = parent->parent;
+        model = parentActor->transform->GetModelMatrix() * GetLocalMatrix();
     }
-    model *= this->localMatrix;
-    this->modelMatrix = model;
-    UpdateChildren(model);
+    SetModelMatrix(model);
     requireModelUpdate = false;
-}
 
-void Crimson::Transform::UpdateChildren(glm::mat4 parentModelMatrix) {
-    for (auto & Element : this->children.Elements)
-    {
-        if (Element != nullptr)
-        {
-            glm::mat4 childModel = parentModelMatrix * Element-> GetLocalMatrix();
-            Element->SetModelMatrix(childModel);
-            Element->UpdateChildren(childModel);
+    // Update children recursively (depth-first):
+    for(auto &childEntity : owner->Children.Elements) {
+        if (childEntity == nullptr) continue;
+        Crimson::Actor* childActor = dynamic_cast<Crimson::Actor*>(childEntity);
+        if (childActor) {
+            Transform* childTransform = childActor->transform;
+            if(childTransform != nullptr) {
+                childTransform->UpdateModel();
+            }
         }
     }
-}
 
-void Crimson::Transform::Cleanup() {
-    for (auto & Element : this->children.Elements)
-    {
-        if (Element != nullptr)
-        {
-            Element->ParentObject->Cleanup();
-        }
-    }
 }
 
 glm::mat4 Crimson::Transform::GetLocalMatrix() {

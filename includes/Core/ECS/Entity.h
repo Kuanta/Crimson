@@ -9,12 +9,16 @@
 
 namespace Crimson
 {
+    class Scene;
     class Component;
     class Entity
     {
         //Methods
         public:
-            Entity(){}
+            Entity(){
+                Name = "Default Entity";
+                Initialize();
+            }
             Entity(const std::string& name);
             ~Entity(){}
 
@@ -25,21 +29,25 @@ namespace Crimson
             void Destroy();
 
             //Components
-            void AddComponent(Component* component);
+            virtual void AddComponent(Component* component);
+
+            template<typename T>
+            T* GetComponent();
 
             //Lifecycle
-            void Update(float deltaTime);
-            void Render();
-            void LateUpdate(float deltaTime);
+            virtual void Initialize();
+            virtual void Update(float deltaTime);
+            virtual void Render();
+            virtual void LateUpdate(float deltaTime);
 
         //Properties
         public:
-            int SceneId;
+            int SceneId{};
             string Name;
             ElementsList<Entity*> Children;
             std::vector<Component*> Components;
-            Entity* ParentEntity;
-
+            Entity* ParentEntity{};
+            Scene* ParentScene;
     };
 }
 #endif //CRIMSON_ENTITY_H

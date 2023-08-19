@@ -10707,8 +10707,8 @@ typedef struct sqlite3_rtree_query_info sqlite3_rtree_query_info;
 #endif
 
 /*
-** Register a geometry callback named zGeom that can be used as part of an
-** R-Tree geometry query as follows:
+** Register a mesh callback named zGeom that can be used as part of an
+** R-Tree mesh query as follows:
 **
 **   SELECT ... FROM <rtree> WHERE <rtree col> MATCH $zGeom(... params ...)
 */
@@ -10733,8 +10733,8 @@ struct sqlite3_rtree_geometry {
 };
 
 /*
-** Register a 2nd-generation geometry callback named zScore that can be
-** used as part of an R-Tree geometry query as follows:
+** Register a 2nd-generation mesh callback named zScore that can be
+** used as part of an R-Tree mesh query as follows:
 **
 **   SELECT ... FROM <rtree> WHERE <rtree col> MATCH $zQueryFunc(... params ...)
 */
@@ -10749,7 +10749,7 @@ SQLITE_API int sqlite3_rtree_query_callback(
 
 /*
 ** A pointer to a structure of the following type is passed as the
-** argument to scored geometry callback registered using
+** argument to scored mesh callback registered using
 ** sqlite3_rtree_query_callback().
 **
 ** Note that the first 5 fields of this structure are identical to
@@ -11404,7 +11404,7 @@ SQLITE_API int sqlite3changeset_next(sqlite3_changeset_iter *pIter);
 ** call to [sqlite3changeset_next()] must have returned [SQLITE_ROW]. If this
 ** is not the case, this function returns [SQLITE_MISUSE].
 **
-** Arguments pOp, pnCol and pzTab may not be NULL. Upon return, three
+** Filepath pOp, pnCol and pzTab may not be NULL. Upon return, three
 ** outputs are set through these pointers:
 **
 ** *pOp is set to one of [SQLITE_INSERT], [SQLITE_DELETE] or [SQLITE_UPDATE],

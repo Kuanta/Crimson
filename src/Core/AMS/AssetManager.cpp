@@ -4,7 +4,8 @@
 
 #include "Core/AMS/AssetManager.h"
 #include "Core/AMS/Asset.h"
-#include "Rendering/ShaderAsset.h"
+#include "Core/AMS/ShaderAsset.h"
+#include "Core/AMS/MeshAsset.h"
 
 bool Crimson::AssetManager::Initialize() {
     return CreateTableIfNotExists();
@@ -34,7 +35,7 @@ bool Crimson::AssetManager::CreateTableIfNotExists() {
         CREATE TABLE IF NOT EXISTS assets (
             guid TEXT PRIMARY KEY,
             name TEXT NOT NULL,
-            type TEXT NOT NULL,
+            type INTEGER NOT NULL,
             path TEXT NOT NULL,
             eagerLoad BOOLEAN DEFAULT 0
         );
@@ -141,6 +142,8 @@ std::shared_ptr<Crimson::Asset> Crimson::AssetManager::CreateAsset(Crimson::Asse
     switch (type) {
         case Crimson::AssetType::Shader:
             return std::make_shared<ShaderAsset>(type, guid, name, path);
+        case Crimson::AssetType::Mesh:
+            return std::make_shared<MeshAsset>(guid, name, path);
         default:
             return nullptr;
     }

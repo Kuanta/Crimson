@@ -2,7 +2,7 @@
 // Created by erdem on 26.12.2022.
 //
 
-#include "UniformBuffer.h"
+#include "Rendering/UniformBuffer.h"
 
 Crimson::UniformBuffer::UniformBuffer(unsigned int byteSize, const char* blockName, int bindingPoint)
 {

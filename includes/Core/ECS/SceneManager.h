@@ -14,6 +14,7 @@ namespace Crimson
     public:
         bool Initialize() override;
         void ChangeScene(Scene* newScene);
+        Scene* GetCurrentScene();
         void Update(float deltaTime) override;
         void Render() override;
         void LateUpdate(float deltaTime) override;

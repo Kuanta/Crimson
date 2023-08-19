@@ -2,11 +2,13 @@
 // Created by erdem on 18.08.2023.
 //
 
-#include "Rendering/ShaderAsset.h"
+#include "Core/AMS/ShaderAsset.h"
 #include <vector>
 #include <string>
 #include <algorithm>
 #include "Rendering/Shader.h"
+#include "Core/EngineManager.h"
+#include "Core/Modules/RenderModule.h"
 
 Crimson::ShaderAsset::ShaderAsset(Crimson::AssetType type, const std::string &guid, const std::string &name,
                                   const std::string &filepath) : Asset(type, guid, name, filepath) {
@@ -37,5 +39,8 @@ Crimson::ShaderAsset::ShaderAsset(Crimson::AssetType type, const std::string &gu
     }else{
         shader == nullptr;
     }
+
+    //Bind the uniform buffers
+    EngineManager::GetInstance()->GetEngineModule<RenderModule>()->BindUniformBuffersToShader(shader);
 }
 

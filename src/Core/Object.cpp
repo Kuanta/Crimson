@@ -6,7 +6,6 @@
 
 Crimson::Object::Object() {
     transform = new Transform();
-    transform->ParentObject = this;
 }
 
 Crimson::Object::~Object() {
@@ -30,7 +29,6 @@ void Crimson::Object::Render() {
         (*iter)->Render();
     }
 
-    transform->OnRender();
 }
 
 void Crimson::Object::LateUpdate(float deltaTime) {
@@ -40,8 +38,6 @@ void Crimson::Object::LateUpdate(float deltaTime) {
         (*iter)->LateUpdate(deltaTime);
     }
 
-    //Update transform. It will also update its children
-    transform->LateUpdate(deltaTime);
 }
 
 void Crimson::Object::FixedUpdate(float fixedDeltaTime) {
@@ -51,8 +47,6 @@ void Crimson::Object::FixedUpdate(float fixedDeltaTime) {
         (*iter)->FixedUpdate(fixedDeltaTime);
     }
 
-    //Update transform. It will also update its children
-    transform->FixedUpdate(fixedDeltaTime);
 }
 
 
@@ -61,7 +55,6 @@ void Crimson::Object::Cleanup() {
     {
         (*iter)->Cleanup();
     }
-    transform->Cleanup();
 }
 
 void Crimson::Object::AddComponent(Crimson::Component *component) {

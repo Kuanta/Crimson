@@ -1,10 +1,11 @@
-//
-// Created by erdem on 17.08.2023.
-//
-
 #include "Core/Modules/RenderModule.h"
 #include "Core/EngineManager.h"
 #include "Rendering/RenderWindow.h"
+#include "Rendering/Shader.h"
+#include "Rendering/UniformBuffer.h"
+#include "Core/Camera.h"
+#include "Core/ECS/SceneManager.h"
+#include "Core/ECS/Scene.h"
 
 namespace Crimson
 {
@@ -64,6 +65,10 @@ namespace Crimson
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+        //Initialize buffers
+        this->matricesBuffer = new UniformBuffer(16*9, "Matrices", 0);
+        this->lightsBuffer = new UniformBuffer(100*160 + 4, "Lights", 1);
+
         return true;
     }
 
@@ -86,6 +91,18 @@ namespace Crimson
         EngineModule::PreRender();
         glClearColor(0.0f,0.2f,0.0f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        //Bind matrices buffer
+        Camera* camera = EngineManager::GetInstance()->GetEngineModule<SceneManager>()->GetCurrentScene()->GetMainCamera();
+
+        if (this->matricesBuffer != nullptr && camera != nullptr)
+        {
+
+            this->matricesBuffer->bindBuffer(); //Set the active buffer
+            this->matricesBuffer->updateMat4(camera->getViewMatrix(), 0);
+            this->matricesBuffer->updateMat4(camera->getProjectionMatrix(), sizeof(glm::mat4));
+            this->matricesBuffer->updateVec3(camera->transform->position, sizeof(glm::mat4) * 2);
+        }
     }
 
     void RenderModule::Render() {
@@ -94,8 +111,13 @@ namespace Crimson
 
     void RenderModule::PostRender() {
         EngineModule::PostRender();
-        if(_currentWindow == nullptr) return;
-        _currentWindow->Cleanup();
+
+    }
+
+    void RenderModule::BindUniformBuffersToShader(Shader *shader) {
+        if(shader == nullptr) return;
+        matricesBuffer->setBindingPoint(shader);
+        lightsBuffer->setBindingPoint(shader);
     }
 
 }

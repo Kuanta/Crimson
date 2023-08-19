@@ -4,10 +4,10 @@
 
 #include "Core/AMS/Asset.h"
 
-Crimson::Asset::Asset(Crimson::AssetType assetType, const std::string &guid, const std::string &name, const std::string &arguments)
+Crimson::Asset::Asset(Crimson::AssetType assetType, const std::string &guid, const std::string &name, const std::string &filepath)
 {
     Guid = guid;
     Name = name;
     AssetType = assetType;
-    Arguments = arguments;
+    Filepath = filepath;
 }

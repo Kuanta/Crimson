@@ -6,7 +6,7 @@
 #define CRIMSON_SCENE_H
 
 #include <string>
-#include "Rendering/Camera.h"
+#include "Core/Camera.h"
 
 namespace Crimson
 {
@@ -25,6 +25,7 @@ namespace Crimson
         void Render();
         void LateUpdate(float deltaTime);
         void OnRemove();
+
 
     public:
         std::string Name;

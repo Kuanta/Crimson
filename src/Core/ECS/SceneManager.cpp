@@ -32,3 +32,7 @@ void Crimson::SceneManager::LateUpdate(float deltaTime) {
     EngineModule::LateUpdate(deltaTime);
     CurrentScene->LateUpdate(deltaTime);
 }
+
+Crimson::Scene *Crimson::SceneManager::GetCurrentScene() {
+    return CurrentScene;
+}

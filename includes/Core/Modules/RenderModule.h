@@ -11,7 +11,9 @@
 
 namespace Crimson
 {
+    class UniformBuffer;
     class RenderWindow;
+    class Shader;
     class RenderModule : public EngineModule
     {
     public:
@@ -24,9 +26,14 @@ namespace Crimson
         void Render() override;
         void PostRender() override;
 
+        void BindUniformBuffersToShader(Shader* shader);
 
     private:
         RenderWindow* _currentWindow = nullptr;
+
+        //Buffers
+        UniformBuffer* matricesBuffer = nullptr;
+        UniformBuffer* lightsBuffer = nullptr;
     };
 }
 #endif //CRIMSON_RENDERMODULE_H

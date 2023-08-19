@@ -5,11 +5,11 @@
 #ifndef CRIMSON_PLANEGEOMETRY_H
 #define CRIMSON_PLANEGEOMETRY_H
 
-#include <Rendering/Geometry.h>
+#include <Rendering/SubMesh.h>
 
 namespace Crimson
 {
-    class PlaneGeometry : public Geometry{
+    class PlaneGeometry : public SubMesh{
     public:
         PlaneGeometry(float width, float height, float uvScale=1.0f);
         float width;

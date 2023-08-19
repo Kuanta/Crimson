@@ -5,15 +5,16 @@
 #ifndef CRIMSON_CAMERA_H
 #define CRIMSON_CAMERA_H
 
-#include "../../includes/Core/Object.h"
+#include "Object.h"
 
 namespace Crimson
 {
-    class Camera : public Object{
+    class Camera : public Component{
     public:
         Camera();
         Camera(float fov, float aspectRatio, float near, float far);
 
+        void OnAttach() override;
         glm::mat4 getProjectionMatrix();
         glm::mat4 getViewMatrix();
     private:

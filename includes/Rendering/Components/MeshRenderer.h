@@ -1,8 +1,0 @@
-//
-// Created by erdem on 18.08.2023.
-//
-
-#ifndef CRIMSON_MESHRENDERER_H
-#define CRIMSON_MESHRENDERER_H
-
-#endif //CRIMSON_MESHRENDERER_H

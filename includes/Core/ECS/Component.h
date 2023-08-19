@@ -8,10 +8,13 @@
 namespace Crimson
 {
     class Entity;
+    class Transform;
     class Component {
     public:
         Component()= default;
         ~Component()= default;
+        virtual void OnAttach(){};
+        virtual void OnRemove(){};
         virtual void Update(float deltaTime){};
         virtual void LateUpdate(float deltaTime){};
         virtual void FixedUpdate(float fixedDeltaTime){};
@@ -19,6 +22,8 @@ namespace Crimson
         virtual void Cleanup(){};
 
         Entity* ParentEntity;
+        bool enabled = true;
+        Transform* transform; //Since this is used too much, add it as ref
     };
 }
 

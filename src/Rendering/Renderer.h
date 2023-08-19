@@ -6,8 +6,8 @@
 #define CRIMSON_RENDERER_H
 
 #include "Rendering/RenderWindow.h"
-#include "UniformBuffer.h"
-#include "Camera.h"
+#include "Rendering/UniformBuffer.h"
+#include "Core/Camera.h"
 #include "ShaderManager.h"
 
 namespace Crimson

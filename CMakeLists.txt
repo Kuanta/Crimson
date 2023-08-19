@@ -11,7 +11,7 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_executable(crimson ${SOURCES})
+add_executable(crimson ${SOURCES} includes/Core/Actor.h src/Core/Actor.cpp src/Rendering/MeshInstance.cpp includes/Rendering/MeshInstance.h includes/Core/AMS/MeshAsset.h src/Core/AMS/MeshAsset.cpp includes/Rendering/MaterialParameter.h src/Rendering/MaterialLibrary.cpp includes/Rendering/MaterialLibrary.h src/Rendering/MaterialParameter.cpp)
 
 # Include directories
 target_include_directories(crimson PRIVATE

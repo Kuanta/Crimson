@@ -10,6 +10,7 @@ namespace Crimson
     enum class AssetType
     {
         Shader,
+        Mesh,
     };
 }
 #endif //CRIMSON_ASSETTYPE_H

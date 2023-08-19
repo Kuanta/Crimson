@@ -29,15 +29,7 @@ void Crimson::EngineManager::StartEngine() {
             }
         }
 
-        //Render
-        for (auto& pair : modulesMap)
-        {
-            EngineModule* module = pair.second;
-            if (module)
-            {
-                module->Render();
-            }
-        }
+        Render();
 
         //LateUpdate
         for (auto& pair : modulesMap)
@@ -68,7 +60,23 @@ void Crimson::EngineManager::Render() {
         EngineModule* module = pair.second;
         if (module)
         {
+            module->PreRender();
+        }
+    }
+    for (auto& pair : modulesMap)
+    {
+        EngineModule* module = pair.second;
+        if (module)
+        {
             module->Render();
+        }
+    }
+    for (auto& pair : modulesMap)
+    {
+        EngineModule* module = pair.second;
+        if (module)
+        {
+            module->PostRender();
         }
     }
 }
@@ -95,10 +103,11 @@ bool Crimson::EngineManager::InitializeEngine() {
     //Register modules
     RenderModule* windowModule = new RenderModule();
     SceneManager* sceneManager = new SceneManager();
-    AssetManager.Initialize();
 
     RegisterModule(windowModule);
     RegisterModule(sceneManager);
+
+
 
     for (auto& pair : modulesMap)
     {
@@ -108,5 +117,10 @@ bool Crimson::EngineManager::InitializeEngine() {
             if(!module->Initialize()) return false;
         }
     }
+
+    AssetManager.Initialize(); //Asset manager first
+    MaterialLibrary.Initialize();
     return  true;
 }
+
+Crimson::EngineManager* Crimson::EngineManager::instance = nullptr;

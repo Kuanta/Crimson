@@ -26,6 +26,7 @@ Crimson::Camera *Crimson::Scene::GetMainCamera() {
 
 void Crimson::Scene::AddEntity(Entity *entity) {
     _root->Add(entity);
+    entity->ParentScene = this;
 }
 
 

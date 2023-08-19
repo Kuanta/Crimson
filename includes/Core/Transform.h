@@ -14,29 +14,21 @@
 
 namespace Crimson
 {
-    class Object;
+    class Actor;
 
     class Transform{
     public:
-        Object* ParentObject;
+        Actor* owner;
 
         //Attributes
         glm::vec3 position;
         glm::quat rotation;
         glm::vec3 scale;
 
-        //todo: Add local pos, rot scale
-
-        //Parenting
-        Transform* parent;
-        ElementsList<Transform*> children;
 
         Transform();
 
         void Update(float deltaTime);
-        void LateUpdate(float deltaTime);
-        void FixedUpdate(float fixedDeltaTime);
-        void OnRender();
         void Cleanup();
 
         //Transform Calculations
@@ -54,12 +46,10 @@ namespace Crimson
         void UpdateLocalMatrix(); //Updates local matrix
         void UpdateModel(); //Updates final model matrix by checking its parents
 
-        void UpdateChildren(glm::mat4 parentModelMatrix);
-
     private:
         bool requireModelUpdate = false;
-        glm::mat4 modelMatrix;
-        glm::mat4 localMatrix;
+        glm::mat4 modelMatrix = glm::mat4(1.0);
+        glm::mat4 localMatrix = glm::mat4(1.0);
     };
 
 }
