@@ -13,15 +13,8 @@ bool Crimson::RenderWindow::Initialize() {
         return false;
     }
 
-    glfwMakeContextCurrent(glfwWindow);
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        return false;
-    }
-
+    glfwSetFramebufferSizeCallback(glfwWindow, framebuffer_size_callback);
     glfwSetWindowUserPointer(glfwWindow, this);
-    glViewport(0, 0, 800, 600);
-    glEnable(GL_DEPTH_TEST);
     return true;
 }
 
@@ -46,4 +39,8 @@ void Crimson::RenderWindow::Cleanup() {
 
 void Crimson::RenderWindow::SetWindowShouldClose() {
     glfwSetWindowShouldClose(glfwWindow, true);
+}
+
+void Crimson::RenderWindow::SetCurrentContext() {
+    glfwMakeContextCurrent(glfwWindow);
 }

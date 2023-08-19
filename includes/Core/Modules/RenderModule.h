@@ -2,8 +2,8 @@
 // Created by erdem on 17.08.2023.
 //
 
-#ifndef CRIMSON_RENDERWINDOWMODULE_H
-#define CRIMSON_RENDERWINDOWMODULE_H
+#ifndef CRIMSON_RENDERMODULE_H
+#define CRIMSON_RENDERMODULE_H
 
 
 #include <GLFW/glfw3.h>
@@ -12,11 +12,11 @@
 namespace Crimson
 {
     class RenderWindow;
-    class RenderWindowModule : public EngineModule
+    class RenderModule : public EngineModule
     {
     public:
-        RenderWindowModule();
-        ~RenderWindowModule();
+        RenderModule();
+        ~RenderModule();
 
         bool Initialize() override;
         void PreRender() override;
@@ -29,4 +29,4 @@ namespace Crimson
         RenderWindow* _currentWindow = nullptr;
     };
 }
-#endif //CRIMSON_RENDERWINDOWMODULE_H
+#endif //CRIMSON_RENDERMODULE_H

@@ -70,7 +70,6 @@ bool Crimson::AssetManager::LoadAsset(const std::string &guid) {
         AssetType type = static_cast<AssetType>(sqlite3_column_int(stmt, 2)); // Assuming AssetType enum values match with DB
         std::string path = std::string(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3)));
 
-        sqlite3_finalize(stmt);
         std::shared_ptr<Asset> asset = CreateAsset(type, retGuid, name, path);
         assets[guid] = asset;
     }

@@ -11,7 +11,7 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_executable(crimson ${SOURCES} includes/Core/AMS/AssetType.h includes/Rendering/ShaderAsset.h src/Rendering/ShaderAsset.cpp)
+add_executable(crimson ${SOURCES})
 
 # Include directories
 target_include_directories(crimson PRIVATE
