@@ -6,6 +6,7 @@
 #include "Core/Modules/EngineModule.h"
 #include "Core/Modules/RenderModule.h"
 #include "Core/ECS/SceneManager.h"
+#include "Core/TimeManager.h"
 
 void Crimson::EngineManager::RegisterModule(Crimson::EngineModule *module) {
     modulesMap[std::type_index(typeid(*module))] = module;
@@ -18,14 +19,12 @@ void Crimson::EngineManager::StartEngine() {
     while(!_engineShouldStop)
     {
         //Update
-        this->TimeManager.Update();
-        float deltaTime = 0.5f;
         for (auto& pair : modulesMap)
         {
             EngineModule* module = pair.second;
             if (module)
             {
-                module->Update(deltaTime);
+                module->Update();
             }
         }
 
@@ -37,7 +36,7 @@ void Crimson::EngineManager::StartEngine() {
             EngineModule* module = pair.second;
             if (module)
             {
-                module->LateUpdate(deltaTime);
+                module->LateUpdate();
             }
         }
     }
@@ -49,7 +48,7 @@ void Crimson::EngineManager::Update() {
         EngineModule* module = pair.second;
         if (module)
         {
-            module->Update(0.0f);
+            module->Update();
         }
     }
 }
@@ -87,7 +86,7 @@ void Crimson::EngineManager::LateUpdate() {
         EngineModule* module = pair.second;
         if (module)
         {
-            module->LateUpdate(1.0f);
+            module->LateUpdate();
         }
     }
 }
@@ -103,10 +102,11 @@ bool Crimson::EngineManager::InitializeEngine() {
     //Register modules
     RenderModule* windowModule = new RenderModule();
     SceneManager* sceneManager = new SceneManager();
+    TimeManager* timeManager = new TimeManager();
 
     RegisterModule(windowModule);
     RegisterModule(sceneManager);
-
+    RegisterModule(timeManager);
 
 
     for (auto& pair : modulesMap)

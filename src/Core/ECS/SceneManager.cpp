@@ -18,9 +18,9 @@ void Crimson::SceneManager::ChangeScene(Crimson::Scene *newScene) {
     CurrentScene->OnSetup();
 }
 
-void Crimson::SceneManager::Update(float deltaTime) {
-    EngineModule::Update(deltaTime);
-    CurrentScene->Update(deltaTime);
+void Crimson::SceneManager::Update() {
+    EngineModule::Update();
+    CurrentScene->Update();
 }
 
 void Crimson::SceneManager::Render() {
@@ -28,9 +28,9 @@ void Crimson::SceneManager::Render() {
     CurrentScene->Render();
 }
 
-void Crimson::SceneManager::LateUpdate(float deltaTime) {
-    EngineModule::LateUpdate(deltaTime);
-    CurrentScene->LateUpdate(deltaTime);
+void Crimson::SceneManager::LateUpdate() {
+    EngineModule::LateUpdate();
+    CurrentScene->LateUpdate();
 }
 
 Crimson::Scene *Crimson::SceneManager::GetCurrentScene() {

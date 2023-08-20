@@ -16,7 +16,7 @@ void Crimson::Object::Update(float deltaTime) {
     //Update components
     for (vector<Component*>::iterator iter = this->components.begin(); iter != this->components.end(); iter++)
     {
-        (*iter)->Update(deltaTime);
+       //(*iter)->Update(deltaTime);
     }
 
     //Update transform. It will also update its children
@@ -35,7 +35,7 @@ void Crimson::Object::LateUpdate(float deltaTime) {
     //Update components
     for (vector<Component*>::iterator iter = this->components.begin(); iter != this->components.end(); iter++)
     {
-        (*iter)->LateUpdate(deltaTime);
+       // (*iter)->LateUpdate(deltaTime);
     }
 
 }
@@ -44,7 +44,7 @@ void Crimson::Object::FixedUpdate(float fixedDeltaTime) {
     //Update components
     for (vector<Component*>::iterator iter = this->components.begin(); iter != this->components.end(); iter++)
     {
-        (*iter)->FixedUpdate(fixedDeltaTime);
+       //(*iter)->FixedUpdate(fixedDeltaTime);
     }
 
 }

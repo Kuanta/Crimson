@@ -8,8 +8,8 @@ void Crimson::Actor::Initialize() {
     transform->owner = this;
 }
 
-void Crimson::Actor::LateUpdate(float deltaTime) {
-    Entity::LateUpdate(deltaTime);
+void Crimson::Actor::LateUpdate() {
+    Entity::LateUpdate();
     if(transform == nullptr) return;
     transform->UpdateModel();
 }

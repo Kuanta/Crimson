@@ -10,7 +10,7 @@ namespace Crimson
 {
     class NotifierComponent : public Component{
     public:
-        void Update(float deltaTime) override;
+        void Update() override;
 
     private:
         float _lastTime;

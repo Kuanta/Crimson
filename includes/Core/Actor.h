@@ -18,7 +18,7 @@ namespace Crimson
         Actor();
         Actor(const std::string& name);
         void Initialize() override;
-        void LateUpdate(float deltaTime) override;
+        void LateUpdate() override;
         void AddComponent(Component* component) override;
     public:
         Transform* transform;

@@ -1,15 +1,21 @@
-//
-// Created by erdem on 18.08.2023.
-//
-
 #ifndef CRIMSON_TIMEMANAGER_H
 #define CRIMSON_TIMEMANAGER_H
 
 #include <chrono>
+#include "Core/Modules/EngineModule.h"
+
+
+extern "C"
+{
+#include <lua.h>
+#include <lauxlib.h>
+#include <lualib.h>
+};
+
 
 namespace Crimson
 {
-    class TimeManager
+    class TimeManager : public EngineModule
     {
         public:
             static double DeltaTime;
@@ -19,23 +25,15 @@ namespace Crimson
             std::chrono::high_resolution_clock::time_point lastFrameTimePoint;
 
 
+
         public:
             TimeManager() {
                 startTime = std::chrono::high_resolution_clock::now();
                 lastFrameTimePoint = startTime;
             }
 
-            void Update() {
-                auto now = std::chrono::high_resolution_clock::now();
-
-                std::chrono::duration<double> elapsed = now - lastFrameTimePoint;
-                DeltaTime = elapsed.count();
-
-                elapsed = now - startTime;
-                ElapsedTime = elapsed.count();
-
-                lastFrameTimePoint = now;
-            }
+            bool Initialize() override;
+            void Update() override;
 
             static double GetDeltaTime(){
                 return DeltaTime;
@@ -44,6 +42,16 @@ namespace Crimson
             static double GetElapsedTime(){
                 return ElapsedTime;
             }
+
+        static int Lua_GetDeltaTime(lua_State* L) {
+            lua_pushnumber(L, DeltaTime);
+            return 1;  // We are returning 1 value to Lua.
+        }
+
+        static int Lua_GetElapsedTime(lua_State* L) {
+            lua_pushnumber(L, ElapsedTime);
+            return 1;  // We are returning 1 value to Lua.
+        }
 
     };
 }

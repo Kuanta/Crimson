@@ -9,7 +9,6 @@
 #include <typeinfo>
 #include <typeindex>
 #include <unordered_map>
-#include "Core/TimeManager.h"
 #include "Core/AMS/AssetManager.h"
 #include "Rendering/MaterialLibrary.h"
 
@@ -58,7 +57,6 @@ namespace Crimson
 
 
     public:
-        TimeManager TimeManager;
         AssetManager AssetManager;
         MaterialLibrary MaterialLibrary;
 

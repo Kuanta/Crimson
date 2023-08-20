@@ -6,6 +6,7 @@
 #include "Rendering/MeshInstance.h"
 #include "Core/Actor.h"
 #include "Core/Camera.h"
+#include "Scripting/ScriptingComponent.h"
 
 using namespace Crimson;
 
@@ -37,6 +38,7 @@ int main() {
     dummyEntity->transform->SetRotation(glm::vec3(0,0,45.0f));
     MeshRenderer* meshRenderer = new MeshRenderer();
     MeshInstance* mesh = new MeshInstance();
+    ScriptingComponent* sc = new ScriptingComponent("./Assets/Scripts/EngineScripts/name_displayer.lua");
 
     std::shared_ptr<Crimson::MeshAsset> meshAsset = CreatePlaneMeshAsset(1, 1, 1.0f);
 
@@ -44,6 +46,8 @@ int main() {
     meshRenderer->SetMesh(mesh);
     defaultScene->AddEntity(dummyEntity);
     dummyEntity->AddComponent(meshRenderer);
+    dummyEntity->AddComponent(sc);
+
 
     em->StartEngine();
 

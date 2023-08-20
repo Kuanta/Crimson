@@ -36,9 +36,9 @@ namespace Crimson
 
             //Lifecycle
             virtual void Initialize();
-            virtual void Update(float deltaTime);
+            virtual void Update();
             virtual void Render();
-            virtual void LateUpdate(float deltaTime);
+            virtual void LateUpdate();
 
         //Properties
         public:

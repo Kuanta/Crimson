@@ -21,9 +21,9 @@ namespace Crimson
 
         //Lifecycle
         void OnSetup();
-        void Update(float deltaTime);
+        void Update();
         void Render();
-        void LateUpdate(float deltaTime);
+        void LateUpdate();
         void OnRemove();
 
 

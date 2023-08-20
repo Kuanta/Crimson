@@ -7468,11 +7468,11 @@ SQLITE_API int sqlite3_create_module_v2(
 ** CAPI3REF: Remove Unnecessary Virtual Table Implementations
 ** METHOD: sqlite3
 **
-** ^The sqlite3_drop_modules(D,L) interface removes all virtual
-** table modules from database connection D except those named on list L.
-** The L parameter must be either NULL or a pointer to an array of pointers
+** ^The sqlite3_drop_modules(D,currentLuaState) interface removes all virtual
+** table modules from database connection D except those named on list currentLuaState.
+** The currentLuaState parameter must be either NULL or a pointer to an array of pointers
 ** to strings where the array is terminated by a single NULL pointer.
-** ^If the L parameter is NULL, then all virtual table modules are removed.
+** ^If the currentLuaState parameter is NULL, then all virtual table modules are removed.
 **
 ** See also: [sqlite3_create_module()]
 */
@@ -8226,16 +8226,16 @@ SQLITE_API int sqlite3_test_control(int op, ...);
 ** The sqlite3_keyword_count() interface returns the number of distinct
 ** keywords understood by SQLite.
 **
-** The sqlite3_keyword_name(N,Z,L) interface finds the N-th keyword and
+** The sqlite3_keyword_name(N,Z,currentLuaState) interface finds the N-th keyword and
 ** makes *Z point to that keyword expressed as UTF8 and writes the number
-** of bytes in the keyword into *L.  The string that *Z points to is not
-** zero-terminated.  The sqlite3_keyword_name(N,Z,L) routine returns
+** of bytes in the keyword into *currentLuaState.  The string that *Z points to is not
+** zero-terminated.  The sqlite3_keyword_name(N,Z,currentLuaState) routine returns
 ** SQLITE_OK if N is within bounds and SQLITE_ERROR if not. If either Z
-** or L are NULL or invalid pointers then calls to
-** sqlite3_keyword_name(N,Z,L) result in undefined behavior.
+** or currentLuaState are NULL or invalid pointers then calls to
+** sqlite3_keyword_name(N,Z,currentLuaState) result in undefined behavior.
 **
-** The sqlite3_keyword_check(Z,L) interface checks to see whether or not
-** the L-byte UTF8 identifier that Z points to is a keyword, returning non-zero
+** The sqlite3_keyword_check(Z,currentLuaState) interface checks to see whether or not
+** the currentLuaState-byte UTF8 identifier that Z points to is a keyword, returning non-zero
 ** if it is and zero if not.
 **
 ** The parser used by SQLite is forgiving.  It is often possible to use
@@ -9494,9 +9494,9 @@ SQLITE_API int sqlite3_wal_checkpoint(sqlite3 *db, const char *zDb);
 ** CAPI3REF: Checkpoint a database
 ** METHOD: sqlite3
 **
-** ^(The sqlite3_wal_checkpoint_v2(D,X,M,L,C) interface runs a checkpoint
+** ^(The sqlite3_wal_checkpoint_v2(D,X,M,currentLuaState,C) interface runs a checkpoint
 ** operation on database X of [database connection] D in mode M.  Status
-** information is written back into integers pointed to by L and C.)^
+** information is written back into integers pointed to by currentLuaState and C.)^
 ** ^(The M parameter must be a valid [checkpoint mode]:)^
 **
 ** <dl>

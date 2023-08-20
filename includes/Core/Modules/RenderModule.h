@@ -22,7 +22,7 @@ namespace Crimson
 
         bool Initialize() override;
         void PreRender() override;
-        void Update(float deltaTime) override;
+        void Update() override;
         void Render() override;
         void PostRender() override;
 

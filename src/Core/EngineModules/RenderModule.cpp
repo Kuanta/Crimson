@@ -72,7 +72,7 @@ namespace Crimson
         return true;
     }
 
-    void RenderModule::Update(float deltaTime)
+    void RenderModule::Update()
     {
         if (!_currentWindow)
         {
@@ -97,7 +97,6 @@ namespace Crimson
 
         if (this->matricesBuffer != nullptr && camera != nullptr)
         {
-
             this->matricesBuffer->bindBuffer(); //Set the active buffer
             this->matricesBuffer->updateMat4(camera->getViewMatrix(), 0);
             this->matricesBuffer->updateMat4(camera->getProjectionMatrix(), sizeof(glm::mat4));

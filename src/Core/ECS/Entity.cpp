@@ -23,19 +23,19 @@ void Crimson::Entity::Destroy() {
 
 }
 
-void Crimson::Entity::Update(float deltaTime) {
+void Crimson::Entity::Update() {
     //Components
     for (auto & component : Components)
     {
         if (component == nullptr) continue;
-        component->Update(deltaTime);
+        component->Update();
     }
 
     //Children
     for (auto & Element : Children.Elements)
     {
         if (Element == nullptr) continue;
-        Element->Update(deltaTime);
+        Element->Update();
     }
 }
 
@@ -54,19 +54,19 @@ void Crimson::Entity::Render() {
     }
 }
 
-void Crimson::Entity::LateUpdate(float deltaTime) {
+void Crimson::Entity::LateUpdate() {
     //Components
     for (auto & it : Components)
     {
         if (it == nullptr) continue;
-        it->LateUpdate(deltaTime);
+        it->LateUpdate();
     }
 
     //Children
     for (auto & Element : Children.Elements)
     {
         if (Element == nullptr) continue;
-        Element->LateUpdate(deltaTime);
+        Element->LateUpdate();
     }
 }
 

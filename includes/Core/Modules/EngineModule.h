@@ -13,8 +13,8 @@ namespace Crimson
     public:
         virtual ~EngineModule(){}
         virtual bool Initialize() = 0;
-        virtual void Update(float deltaTime) {}
-        virtual void LateUpdate(float deltaTime){}
+        virtual void Update() {}
+        virtual void LateUpdate(){}
         virtual void PreRender(){}
         virtual void Render(){}
         virtual void PostRender(){}

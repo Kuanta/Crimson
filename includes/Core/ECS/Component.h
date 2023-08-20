@@ -11,17 +11,20 @@ namespace Crimson
     class Transform;
     class Component {
     public:
-        Component()= default;
+        Component() {
+            Initialize();
+        };
         ~Component()= default;
         virtual void OnAttach(){};
         virtual void OnRemove(){};
-        virtual void Update(float deltaTime){};
-        virtual void LateUpdate(float deltaTime){};
-        virtual void FixedUpdate(float fixedDeltaTime){};
+        virtual void Initialize(){};
+        virtual void Update(){};
+        virtual void LateUpdate(){};
+        virtual void FixedUpdate(){};
         virtual void Render(){};
         virtual void Cleanup(){};
 
-        Entity* ParentEntity;
+        Entity* ParentEntity = nullptr;
         bool enabled = true;
         Transform* transform; //Since this is used too much, add it as ref
     };

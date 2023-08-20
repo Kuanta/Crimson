@@ -7,8 +7,8 @@
 #include "Core/ECS/Entity.h"
 #include "Core/TimeManager.h"
 
-void Crimson::NotifierComponent::Update(float deltaTime) {
-    Component::Update(deltaTime);
+void Crimson::NotifierComponent::Update() {
+    Component::Update();
 
     float timeSince = TimeManager::GetElapsedTime() - _lastTime;
     if(timeSince > 2.0f)

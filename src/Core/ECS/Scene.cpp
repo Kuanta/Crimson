@@ -39,15 +39,15 @@ void Crimson::Scene::OnRemove() {
 
 }
 
-void Crimson::Scene::Update(float deltaTime) {
-    _root->Update(deltaTime);
+void Crimson::Scene::Update() {
+    _root->Update();
 }
 
 void Crimson::Scene::Render() {
     _root->Render();
 }
 
-void Crimson::Scene::LateUpdate(float deltaTime) {
-    _root->LateUpdate(deltaTime);
+void Crimson::Scene::LateUpdate() {
+    _root->LateUpdate();
 }
 
