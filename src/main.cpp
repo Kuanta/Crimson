@@ -48,7 +48,7 @@ int main() {
     dummyEntity->AddComponent(meshRenderer);
     dummyEntity->AddComponent(sc);
 
-
+    std::cout<<"Starting Engine!"<<std::endl;
     em->StartEngine();
 
     return 0;
@@ -97,6 +97,7 @@ std::shared_ptr<MeshAsset> CreatePlaneMeshAsset(int width, int height, float uvS
         vert.Tangent = glm::vec3(tangents[i], tangents[i + 1], tangents[i + 2]);
         vertices.push_back(vert);
     }
+    meshAsset->SetSubmeshCount(1);
     meshAsset->SetVertices(vertices);
     meshAsset->SetIndices(indices);
     return meshAsset;

@@ -43,7 +43,7 @@ namespace Crimson
 
         //3. Create context window
        _currentWindow = new Crimson::RenderWindow();
-       if(!_currentWindow->Initialize()){
+       if(!_currentWindow->Initialize(1920, 1080)){
            return false;
        }
         _currentWindow->SetCurrentContext();
@@ -60,7 +60,7 @@ namespace Crimson
         }
 
         //5. Set default opengl settings
-        glViewport(0, 0, 800, 600);
+        glViewport(0, 0, 1920, 1080);
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

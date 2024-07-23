@@ -12,7 +12,7 @@ namespace Crimson
         GLFWwindow* glfwWindow;
 
         //Lifecycle
-        bool Initialize();
+        bool Initialize(int width, int height);
         void Render();
         void Cleanup();
 

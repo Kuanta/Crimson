@@ -21,6 +21,11 @@ void Crimson::Transform::SetPosition(glm::vec3 position) {
     requireModelUpdate = true;
 }
 
+void Crimson::Transform::SetPosition(float x, float y, float z) {
+    SetPosition(glm::vec3(x,y,z));
+}
+
+
 void Crimson::Transform::SetRotation(glm::quat rotation) {
     this->rotation = rotation;
     requireModelUpdate = true;
@@ -112,5 +117,4 @@ glm::vec3 Crimson::Transform::GetForwardDirection() {
 glm::vec3 Crimson::Transform::GetRightDirection(glm::vec3 upVector) {
     return glm::normalize(glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), GetForwardDirection()));
 }
-
 

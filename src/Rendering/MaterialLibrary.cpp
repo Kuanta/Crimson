@@ -1,7 +1,3 @@
-//
-// Created by erdem on 19.08.2023.
-//
-
 #include "Rendering/MaterialLibrary.h"
 #include "Rendering/Material.h"
 #include "Core/EngineManager.h"

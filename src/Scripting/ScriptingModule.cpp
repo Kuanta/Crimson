@@ -1,6 +1,6 @@
-#include "ScriptingModule.h"
+#include "Scripting/ScriptingModule.h"
 #include "Core/EngineManager.h"
-#include "ScriptingComponent.h"
+#include "Scripting//ScriptingComponent.h"
 #include "Core/TimeManager.h"
 
 bool Crimson::ScriptingModule::Initialize() {

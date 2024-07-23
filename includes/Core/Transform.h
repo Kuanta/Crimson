@@ -33,6 +33,7 @@ namespace Crimson
 
         //Transform Calculations
         void SetPosition(glm::vec3 position);
+        void SetPosition(float x, float y, float z);
         void SetRotation(glm::vec3 eulerAngles);
         void SetRotation(glm::quat rotation);
         void SetScale(glm::vec3 scale);

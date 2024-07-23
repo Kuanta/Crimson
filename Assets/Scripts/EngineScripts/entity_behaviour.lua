@@ -6,6 +6,7 @@ end
 
 function EntityBehaviour:SetPosition(x, y, z)
     -- Here, you'd typically change the position of the entity.
+    Crimson.SetPosition(x,y,z)
 end
 
 -- This can be called by user scripts to get the global delta time

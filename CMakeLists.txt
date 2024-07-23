@@ -10,10 +10,11 @@ file(GLOB_RECURSE HEADERS "src/*.h" "includes/*.h" "Testing/*.h")
 find_package(glfw3 CONFIG REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Lua REQUIRED)
+find_package(Assimp CONFIG REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_executable(crimson ${SOURCES} includes/Core/Actor.h src/Core/Actor.cpp src/Rendering/MeshInstance.cpp includes/Rendering/MeshInstance.h includes/Core/AMS/MeshAsset.h src/Core/AMS/MeshAsset.cpp includes/Rendering/MaterialParameter.h src/Rendering/MaterialLibrary.cpp includes/Rendering/MaterialLibrary.h src/Rendering/MaterialParameter.cpp includes/Scripting/ScriptingModule.cpp includes/Scripting/ScriptingModule.h includes/Scripting/ScriptingComponent.cpp includes/Scripting/ScriptingComponent.h)
+add_executable(crimson ${SOURCES})
 
 # Include directories
 target_include_directories(crimson PRIVATE
@@ -29,12 +30,13 @@ target_link_libraries(crimson
         PRIVATE glfw
         PRIVATE ${Boost_LIBRARIES}
         PRIVATE ${LUA_LIBRARIES}
+        PRIVATE assimp::assimp
         -lassimp.dll
         -lgdi32
         -lopengl32
         -lbcrypt
         )
-set(SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/EngineScripts")
-set(DEST_DIR "${CMAKE_CURRENT_BINARY_DIR}/Assets/Scripts/")
+set(SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Assets")
+set(DEST_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 
 file(COPY ${SOURCE_DIR} DESTINATION ${DEST_DIR})

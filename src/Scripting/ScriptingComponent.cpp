@@ -1,11 +1,9 @@
-//
-// Created by erdem on 20.08.2023.
-//
-
-#include "ScriptingComponent.h"
-#include "ScriptingModule.h"
+#include "Scripting/ScriptingComponent.h"
+#include "Scripting/ScriptingModule.h"
 #include "Core/ECS/Entity.h"
 #include "Core/TimeManager.h"
+#include "Core/Actor.h"
+#include "Core/Transform.h"
 
 
 Crimson::ScriptingComponent::ScriptingComponent(const std::string &filePath) {
@@ -62,7 +60,29 @@ void Crimson::ScriptingComponent::CallFunction(lua_State *luaState, const std::s
 }
 
 int Crimson::ScriptingComponent::l_SetPosition(lua_State *L) {
-    return 0;
+    // Check the number of arguments passed from Lua
+    int numArgs = lua_gettop(L);
+    if (numArgs != 3) {
+        return luaL_error(L, "SetPosition expects 3 arguments (x, y, z)");
+    }
+
+    // Extract x, y, and z arguments from the Lua stack
+    float x = luaL_checknumber(L, 1);
+    float y = luaL_checknumber(L, 2);
+    float z = luaL_checknumber(L, 3);
+
+    // Now you have x, y, and z values extracted from Lua
+    // Use these values to set the position of the entity
+
+    Entity* entity = GetEntityFromLuaState(L);
+    if(entity == nullptr) {
+        return 0;
+    }
+    if(Actor* actor = dynamic_cast<Actor*>(entity))
+    {
+        actor->transform->SetPosition(x,y,z);
+    }
+    return 0; // Return the number of values pushed onto the Lua stack
 }
 
 int Crimson::ScriptingComponent::l_SetRotation(lua_State *L) {

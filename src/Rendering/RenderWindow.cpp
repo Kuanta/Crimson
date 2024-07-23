@@ -4,9 +4,9 @@
 
 #include "Rendering/RenderWindow.h"
 
-bool Crimson::RenderWindow::Initialize() {
+bool Crimson::RenderWindow::Initialize(int width, int height) {
 
-    this->glfwWindow = glfwCreateWindow(800, 600, "Crimson", NULL, NULL);
+    this->glfwWindow = glfwCreateWindow(width, height, "Crimson", NULL, NULL);
     glfwSetFramebufferSizeCallback(this->glfwWindow, framebuffer_size_callback);
     if(glfwWindow == nullptr)
     {

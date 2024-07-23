@@ -43,20 +43,17 @@ namespace Crimson
         bool indexed = false;
     };
 
-    class MeshAsset : public Asset{
+    class MeshAsset{
 
     public:
-        MeshAsset();
-        MeshAsset(const std::string &guid, const std::string &name, const std::string &path);
 
         void SetVertices(std::vector<Vertex> vertices, int subMeshIndex = 0);
         void SetIndices(std::vector<unsigned int> indices, int subMeshIndex = 0);
         void SetMaterialId(int index, std::string id);
-
-    private:
-        void ReadAsset();
         void AddSubMeshAsset(GeometryData subMeshAsset);
+        void SetSubmeshCount(int count);
 
+        const static int NUM_BONES_PER_VERTEX = 4;
     public:
         std::vector<GeometryData> subMeshAssets;
         std::vector<std::string> materialIds;

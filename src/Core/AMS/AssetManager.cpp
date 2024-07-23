@@ -5,7 +5,7 @@
 #include "Core/AMS/AssetManager.h"
 #include "Core/AMS/Asset.h"
 #include "Core/AMS/ShaderAsset.h"
-#include "Core/AMS/MeshAsset.h"
+#include "Core/AMS/ModelAsset.h"
 
 bool Crimson::AssetManager::Initialize() {
     return CreateTableIfNotExists();
@@ -143,7 +143,7 @@ std::shared_ptr<Crimson::Asset> Crimson::AssetManager::CreateAsset(Crimson::Asse
         case Crimson::AssetType::Shader:
             return std::make_shared<ShaderAsset>(type, guid, name, path);
         case Crimson::AssetType::Mesh:
-            return std::make_shared<MeshAsset>(guid, name, path);
+            return std::make_shared<ModelAsset>(guid, name, path);
         default:
             return nullptr;
     }
