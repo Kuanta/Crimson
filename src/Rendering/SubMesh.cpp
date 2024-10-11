@@ -2,7 +2,7 @@
 // Created by erdem on 26.12.2022.
 //
 
-#include "SubMesh.h"
+#include "Rendering/SubMesh.h"
 #include "Core/AMS/MeshAsset.h"
 
 Crimson::SubMesh::SubMesh(Crimson::GeometryData* subMeshAsset) {
