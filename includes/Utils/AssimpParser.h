@@ -5,6 +5,8 @@
 #ifndef CRIMSON_ASSIMPPARSER_H
 #define CRIMSON_ASSIMPPARSER_H
 
+#define GLM_ENABLE_EXPERIMENTAL
+
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>

@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include <glm/detail/type_mat.hpp>
+#include <glm/detail/type_mat4x4.hpp>
 
 namespace Crimson
 {
