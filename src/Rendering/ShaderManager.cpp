@@ -2,7 +2,7 @@
 // Created by erdem on 26.12.2022.
 //
 
-#include "ShaderManager.h"
+#include "Rendering/ShaderManager.h"
 
 Crimson::ShaderManager::ShaderManager() {
 

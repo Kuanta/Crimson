@@ -3,6 +3,9 @@ project(crimson)
 
 set(CMAKE_CXX_STANDARD 14)
 
+# Define the path to the vcpkg toolchain file
+set(CMAKE_TOOLCHAIN_FILE "../vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
+
 # Source and Header files
 file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.c" "Testing/*.cpp")
 file(GLOB_RECURSE HEADERS "src/*.h" "includes/*.h" "Testing/*.h")

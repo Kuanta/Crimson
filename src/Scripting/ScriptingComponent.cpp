@@ -42,7 +42,6 @@ void Crimson::ScriptingComponent::RegisterMethods(lua_State *luaState) {
 
 void Crimson::ScriptingComponent::Update() {
     Component::Update();
-
     CallFunction(luaState, "Update");
 }
 
@@ -71,6 +70,7 @@ int Crimson::ScriptingComponent::l_SetPosition(lua_State *L) {
     float y = luaL_checknumber(L, 2);
     float z = luaL_checknumber(L, 3);
 
+    fprintf(stdin,"Setting pos to %f - %f - %f", x,y,z);
     // Now you have x, y, and z values extracted from Lua
     // Use these values to set the position of the entity
 

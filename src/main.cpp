@@ -1,4 +1,5 @@
 #include <iostream>
+#include <SOIL2/SOIL2.h>
 #include "Core/EngineManager.h"
 #include "Core/ECS/SceneManager.h"
 #include "Core/ECS/Scene.h"
@@ -16,7 +17,6 @@ int main() {
 
     Crimson::EngineManager* em = EngineManager::GetInstance();
     std::cout<<"Welcome To Crimson!"<<std::endl;
-
     //Initialize Engine
     if(!em->InitializeEngine()) return 1;
 
