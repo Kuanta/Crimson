@@ -1,5 +1,4 @@
 #include <iostream>
-#include <SOIL2/SOIL2.h>
 #include "Core/EngineManager.h"
 #include "Core/ECS/SceneManager.h"
 #include "Core/ECS/Scene.h"

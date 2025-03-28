@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Editor OSX",
+            "program": "${workspaceFolder}/Targets/Debug/bin/Crimson",
+            "cwd": "${workspaceFolder}/Targets/Debug/bin"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Game OSX",
+            "program": "${workspaceFolder}/Targets/Debug/bin/Game",
+            "cwd": "${workspaceFolder}/Targets/Debug/bin"
+        }
+    ]
+}

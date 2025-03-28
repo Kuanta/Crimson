@@ -6,10 +6,7 @@
 #define CRIMSON_TEXTURE_H
 
 #include <iostream>
-#include <GL/gl.h>
-#include <SOIL2/SOIL2.h>
-#include "stb_image.h"
-
+#include "glad/glad.h"
 using namespace std;
 
 namespace Crimson

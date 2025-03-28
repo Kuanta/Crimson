@@ -1,0 +1,84 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+	  {
+		"label": "Crimson-Debug",
+		"type": "shell",
+		"group": { "kind": "build", "isDefault": true },
+		"problemMatcher": ["$gcc"],
+		"options": { "cwd": "${workspaceFolder}" },
+		"windows": {
+		  "args": ["Debug"],
+		  "command": "${workspaceFolder}/CrimsonWin.bat"
+		},
+		"osx": {
+		  "args": ["Debug"],
+		  "command": "${workspaceFolder}/CrimsonOsx.sh"
+		}
+	  },
+	  {
+		"label": "Crimson-Release",
+		"type": "shell",
+		"group": "build",
+		"problemMatcher": ["$gcc"],
+		"options": { "cwd": "${workspaceFolder}" },
+		"windows": {
+		  "args": ["Release"],
+		  "command": "${workspaceFolder}/CrimsonWin.bat"
+		},
+		"osx": {
+		  "args": ["Release"],
+		  "command": "${workspaceFolder}/CrimsonOsx.sh"
+		}
+	  },
+	  {
+		"label": "Clean (Debug)",
+		"type": "shell",
+		"group": "build",
+		"options": { "cwd": "${workspaceFolder}" },
+		"windows": {
+		  "command": "powershell",
+		  "args": [
+			"-Command",
+			"Remove-Item -Recurse -Force build\\Debug\\*"
+		  ]
+		},
+		"osx": {
+		  "command": "rm",
+		  "args": ["-rf", "build/Debug/*"]
+		}
+	  },
+	  {
+		"label": "Clean (Release)",
+		"type": "shell",
+		"group": "build",
+		"options": { "cwd": "${workspaceFolder}" },
+		"windows": {
+		  "command": "powershell",
+		  "args": [
+			"-Command",
+			"Remove-Item -Recurse -Force build\\Release\\*"
+		  ]
+		},
+		"osx": {
+		  "command": "rm",
+		  "args": ["-rf", "build/Release/*"]
+		}
+	  },
+	  {
+		"label": "Rebuild (Debug)",
+		"type": "shell",
+		"group": "build",
+		"dependsOn": ["Clean (Debug)", "Crimson-Debug"],
+		"dependsOrder": "sequence"
+	  },
+	  {
+		"label": "Rebuild (Release)",
+		"type": "shell",
+		"group": "build",
+		"dependsOn": ["Clean (Release)", "Crimson-Release"],
+		"dependsOrder": "sequence"
+	  }
+	]
+  }
+  

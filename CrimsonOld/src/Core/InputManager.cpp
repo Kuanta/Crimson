@@ -2,7 +2,7 @@
 // Created by erdem on 26.12.2022.
 //
 
-#include "../../includes/Core/InputManager.h"
+#include "Core/InputManager.h"
 
 bool InputManager::Initialize(GLFWwindow* window) {
     glfwSetKeyCallback(window, keyCallback);

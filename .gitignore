@@ -47,3 +47,22 @@ cmake-build-*/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Cmake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# Build 
+build/
+build-*/
+Targets/
+*.o
+*.obj
+*.exe
+*.log
+*.ilk
+*.pdb
+*.user
+*.DS_Store

@@ -2,7 +2,7 @@
 // Created by erdem on 26.12.2022.
 //
 
-#include "../../includes/Core/Object.h"
+#include "Core/Object.h"
 
 Crimson::Object::Object() {
     transform = new Transform();
