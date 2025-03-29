@@ -5,7 +5,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Editor OSX",
-            "program": "${workspaceFolder}/Targets/Debug/bin/Crimson",
+            "program": "${workspaceFolder}/Targets/Debug/bin/Editor",
             "cwd": "${workspaceFolder}/Targets/Debug/bin"
         },
         {

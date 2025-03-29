@@ -1,5 +1,5 @@
 #pragma once
-#include "Core/Core.h"
+#include "Crimson/Core/Core.h"
 
 namespace Crimson
 {
@@ -8,6 +8,14 @@ namespace Crimson
     public:
         Application();
         virtual ~Application();
+
+
+        void Run();
+
         void Test();    
     };
+    
+    //To be defined in application
+    Application* CreateApplication();
+
 } // namespace Crimson

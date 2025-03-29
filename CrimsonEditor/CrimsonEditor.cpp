@@ -1,8 +1,7 @@
-#include <Core/Crimson.h>
+#include "CrimsonEditor.h"
 
-int32_t main(int32_t argc, char** argv)
+
+Crimson::Application* Crimson::CreateApplication()
 {
-    Crimson::Application* crimson = new Crimson::Application();
-    crimson->Test();
-    return 0;
+    return new Crimson::Editor();
 }

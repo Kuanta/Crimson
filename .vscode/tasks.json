@@ -45,7 +45,7 @@
 		},
 		"osx": {
 		  "command": "rm",
-		  "args": ["-rf", "build/Debug/*"]
+		  "args": ["-rf", "build/Debug/"]
 		}
 	  },
 	  {
@@ -62,7 +62,7 @@
 		},
 		"osx": {
 		  "command": "rm",
-		  "args": ["-rf", "build/Release/*"]
+		  "args": ["-rf", "build/Release/"]
 		}
 	  },
 	  {
