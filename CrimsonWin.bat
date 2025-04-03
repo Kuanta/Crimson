@@ -1,14 +1,18 @@
 @echo off
+set BUILD_TYPE=%1
+set TARGET_DIR=Targets\%BUILD_TYPE%
 
-rem output directory
+CALL %USERPROFILE%\anaconda3\Scripts\activate.bat
+CALL conda activate crimson
 
-set target = "Targets/%1"
+REM 1) Hedef klasörü oluştur
+mkdir %TARGET_DIR%
 
-rem install conan dependencies
-conan install . --install-folder %targets% --build-missing -s build type=%1 -c tools.system.package_manager:mode=install
+REM Conan install (C++17 + Ninja)
+conan install . -of=%TARGET_DIR% -b missing -s build_type=%BUILD_TYPE% -s compiler.cppstd=17 -g CMakeDeps -g CMakeToolchain
 
-rem generate cmake build files
-cmake -S . -B %target% -DCMAKE_BUILD_TYPE=%1 -DCMAKE_TOOLCHAIN_FILE="conanbuildinfo.cmake"
+REM 3) CMake konfigürasyonu
+cmake -S . -B %TARGET_DIR% -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DCMAKE_TOOLCHAIN_FILE=%TARGET_DIR%\conan_toolchain.cmake
 
-rem compile cmake build files
-cmake --build %target% --config %1
+REM 4) Build
+cmake --build %TARGET_DIR% --config %BUILD_TYPE%
