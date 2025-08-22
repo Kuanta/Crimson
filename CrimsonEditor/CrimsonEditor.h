@@ -1,6 +1,6 @@
 #pragma once
 #include <Crimson.h>
-
+#include <iostream>
 
 namespace Crimson
 {
@@ -9,7 +9,7 @@ namespace Crimson
     public:
         Editor()
         {
-
+            std::cout<<"Engine Started"<<std::endl;
         }
         ~Editor()
         {

@@ -2,11 +2,6 @@
     "configurations": [
         {
             "name":"cpp-dev",
-            "includePath": [
-                "${workspaceFolder}/CrimsonEditor/include",
-                "${workspaceFolder}/CrimsonEngine/include",
-                "${workspaceFolder}/CrimsonGame/include"
-            ],
             "configurationProvider": "ms-vscode.cmake-tools",
             "defines":["CRIMSON_EXPORT", "CRIMSON_ENABLE_LOG"],
             "macFrameworkPath": [
