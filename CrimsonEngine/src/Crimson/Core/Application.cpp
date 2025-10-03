@@ -5,14 +5,10 @@ namespace Crimson
 {
     Crimson::Application::Application(){}
     Application::~Application(){}
-    void Application::Test()
-    {
-        std::cout<<"Testing!"<<std::endl;
-    }
 
     void Application::Run()
     {
-        std::cout<<"Ran!"<<std::endl;
+        CR_INFO("Application Ran!");
     }
 
 }

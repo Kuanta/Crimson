@@ -1,5 +1,6 @@
 #pragma once
 #include "Crimson/Core/Core.h"
+#include "Crimson/Core/Log/CrimsonLog.h"
 
 namespace Crimson
 {
@@ -9,10 +10,7 @@ namespace Crimson
         Application();
         virtual ~Application();
 
-
         void Run();
-
-        void Test();    
     };
     
     //To be defined in application

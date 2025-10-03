@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# Basit kullanım: ./CrimsonOsx.sh Debug  veya  ./CrimsonOsx.sh Release
-# (Conan 2.x için düzenlenmiştir)
 
 if [ "$#" -lt 1 ]; then
     echo "Usage: $0 <Debug|Release>"
